@@ -1,0 +1,45 @@
+<div class="container mx-auto mt-12">
+  <h2 class="text-2xl font-semibold mb-6">Search History</h2>
+@if (history.length) {
+  <table mat-table [dataSource]="history" class="mat-elevation-z8 w-full">
+    
+    <!-- Search Term Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Search Term </th>
+      <td mat-cell *matCellDef="let element"> {{ element.searchTerm }} </td>
+    </ng-container>
+
+    <!-- Result Column -->
+    <ng-container matColumnDef="result">
+      <th mat-header-cell *matHeaderCellDef> Result </th>
+      <td mat-cell *matCellDef="let element">
+       @if (element.result) {
+        <app-user-profile [userData]="element.result"></app-user-profile>
+       }
+       @else {
+        No result
+       }
+      </td>
+    </ng-container>
+
+    <!-- Clear Button Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button 
+        class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
+          color="warn" 
+          (click)="clearSearch(element.searchTerm)">
+          Clear
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+}
+@else{
+  <div class="text-center">No result</div>
+}
+</div>

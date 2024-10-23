@@ -1,0 +1,8 @@
+.nav-link {
+    @apply text-lg hover:underline cursor-pointer;
+  }
+  
+  .active {
+    @apply font-semibold underline;
+  }
+  
